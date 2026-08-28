@@ -1,0 +1,13 @@
+# Ignore media files - template only
+*.mp4
+*.mp3
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.mov
+*.avi
+imagenes/
+*.DS_Store
+
+# Keep only index.html and documentation

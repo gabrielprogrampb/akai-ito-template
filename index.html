@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Feliz Cumpleaños Yazari - Con amor de Lowel">
+  <meta name="theme-color" content="#FAF7F2">
+  <title>Feliz Cumpleaños Yazari - Lowel</title>
+
+  <!-- Google Fonts: Playfair Display + Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
+
+  <style>
+/* ===== RESET & VARIABLES (Sistema Stitch) ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Light theme (default) */
+  --bg:#FAF7F2;--bg-alt:#F6F1EA;--surface:#FFFFFF;--surface-variant:#FFF8F3;
+  --primary:#C94A4A;--primary-hover:#B83A3A;--primary-light:#FFF0F0;--on-primary:#FFFFFF;
+  --secondary:#D4AF37;--secondary-hover:#C4A030;--on-secondary:#1A1A1A;
+  --on-surface:#1A1A1A;--on-surface-variant:#5A4A4A;--outline:#E8DDD4;--outline-variant:#F0E6DC;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg:0 12px 28px rgba(0,0,0,0.08);--shadow-xl:0 20px 40px rgba(0,0,0,0.05);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;--radius-full:9999px;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-8:48px;--space-10:64px;
+  --text-display:clamp(2.5rem,6vw,4rem);--text-headline-lg:clamp(1.75rem,4vw,2.5rem);--text-headline:clamp(1.5rem,3.5vw,2rem);--text-headline-sm:clamp(1.25rem,3vw,1.5rem);
+  --text-body-lg:1.125rem;--text-body:1rem;--text-body-sm:0.875rem;--text-label:0.75rem;--text-caption:0.75rem;
+  --font-display:'Playfair Display',Georgia,serif;--font-body:'Montserrat',system-ui,sans-serif;
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);--ease-emphasized:cubic-bezier(0.2,0,0,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --duration-fast:150ms;--duration-med:300ms;--duration-long:500ms;
+  --safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom);--safe-left:env(safe-area-inset-left);--safe-right:env(safe-area-inset-right);
+  /* Gradients as variables for theme switching */
+  --grad-bg:radial-gradient(ellipse 80% 50% at 50% 0%,var(--primary-light) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(212,175,55,0.15) 0%,transparent 60%),var(--bg);
+  --grad-counter:linear-gradient(135deg,var(--primary-light) 0%,#FFEBEB 100%);
+  --grad-video-caption:linear-gradient(0deg,rgba(0,0,0,0.85),transparent);
+  --grad-modal-caption:linear-gradient(0deg,rgba(0,0,0,0.9),transparent);
+  --grad-btn-shine:linear-gradient(110deg,transparent 40%,rgba(255,255,255,0.3) 50%,transparent 60%);
+  --grad-letter-divider:linear-gradient(90deg,transparent,var(--primary),transparent);
+  --grad-bottom-border:var(--outline-variant);
+  --video-overlay-bg:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.6) 100%);
+  --vinyl-bg:radial-gradient(circle at 30% 30%,#4a1a1a 0%,#2d0d0d 60%,#1a0505 100%);
+  --vinyl-border:#3d1515;
+  --vinyl-center:#3d1515;
+  --vinyl-ring:rgba(61,21,21,0.3);
+  --paper-bg:#fdfaf6;
+  --paper-border:var(--outline);
+  --thread-color:#C94A4A;
+  --thread-glow:rgba(201,74,74,0.5);
+  --thread-glow-strong:rgba(201,74,74,0.8);
+  --gold-color:#D4AF37;
+  --gold-glow:rgba(212,175,55,0.6);
+  --backdrop-light:rgba(250,247,242,0.85);
+  --backdrop-dark:rgba(26,22,22,0.85);
+  --modal-backdrop:rgba(10,8,8,0.7);
+  --video-backdrop:#000;
+  --video-backdrop-opacity:0.95;
+  --selection-bg:var(--primary);
+  --selection-fg:#fff;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1A1616;--bg-alt:#241E1E;--surface:#1F1A1A;--surface-variant:#2A2424;
+    --primary:#E57373;--primary-hover:#EF5350;--primary-light:#3D2A2A;--on-primary:#1A1A1A;
+    --secondary:#E8C56D;--secondary-hover:#D4AF37;--on-secondary:#1A1A1A;
+    --on-surface:#F5F0F0;--on-surface-variant:#C4B8B8;--outline:#3D3434;--outline-variant:#332B2B;
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.3);--shadow-md:0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg:0 12px 28px rgba(0,0,0,0.5);--shadow-xl:0 20px 40px rgba(0,0,0,0.6);
+    /* Dark gradients */
+    --grad-bg:radial-gradient(ellipse 80% 50% at 50% 0%,var(--primary-light) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 100% 100%,rgba(232,197,109,0.15) 0%,transparent 60%),var(--bg);
+    --grad-counter:linear-gradient(135deg,var(--primary-light) 0%,#4A2A2A 100%);
+    --grad-video-caption:linear-gradient(0deg,rgba(0,0,0,0.9),transparent);
+    --grad-modal-caption:linear-gradient(0deg,rgba(0,0,0,0.95),transparent);
+    --grad-btn-shine:linear-gradient(110deg,transparent 40%,rgba(255,255,255,0.15) 50%,transparent 60%);
+    --grad-letter-divider:linear-gradient(90deg,transparent,var(--primary),transparent);
+    --grad-bottom-border:var(--outline-variant);
+    --video-overlay-bg:linear-gradient(180deg,transparent 50%,rgba(0,0,0,0.8) 100%);
+    --vinyl-bg:radial-gradient(circle at 30% 30%,#5D1A1A 0%,#3D0D0D 60%,#1A0505 100%);
+    --vinyl-border:#5D1A1A;
+    --vinyl-center:#5D1A1A;
+    --vinyl-ring:rgba(93,26,26,0.3);
+    --paper-bg:#2A2424;
+    --paper-border:var(--outline);
+    --thread-color:#E57373;
+    --thread-glow:rgba(229,115,115,0.5);
+    --thread-glow-strong:rgba(229,115,115,0.8);
+    --gold-color:#E8C56D;
+    --gold-glow:rgba(232,197,109,0.5);
+    --backdrop-light:rgba(26,22,22,0.9);
+    --backdrop-dark:rgba(26,22,22,0.9);
+    --modal-backdrop:rgba(0,0,0,0.8);
+    --video-backdrop:#000;
+    --video-backdrop-opacity:0.97;
+    --selection-bg:var(--primary);
+    --selection-fg:#1A1A1A;
+  }
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--on-surface);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+.font-display{font-family:var(--font-display)}
+.font-body{font-family:var(--font-body)}
+.text-display{font-size:var(--text-display)}.text-headline-lg{font-size:var(--text-headline-lg)}.text-headline{font-size:var(--text-headline)}.text-headline-sm{font-size:var(--text-headline-sm)}
+.text-body-lg{font-size:var(--text-body-lg)}.text-body{font-size:var(--text-body)}.text-body-sm{font-size:var(--text-body-sm)}.text-label{font-size:var(--text-label)}.text-caption{font-size:var(--text-caption)}
+.tracking-tight{letter-spacing:-0.02em}.tracking-normal{letter-spacing:0}.tracking-wide{letter-spacing:0.02em}.tracking-widest{letter-spacing:0.1em}
+.font-light{font-weight:300}.font-regular{font-weight:400}.font-medium{font-weight:500}.font-semibold{font-weight:600}.font-bold{font-weight:700}
+.italic{font-style:italic}
+.text-primary{color:var(--primary)}.text-secondary{color:var(--secondary)}.text-on-surface{color:var(--on-surface)}.text-on-surface-variant{color:var(--on-surface-variant)}.text-white{color:#fff}
+.text-glow{text-shadow:0 0 30px rgba(212,175,55,0.6),0 0 60px rgba(212,175,55,0.3)}
+.bg-primary{background:var(--primary)}.bg-primary-light{background:var(--primary-light)}.bg-surface{background:var(--surface)}.bg-surface-variant{background:var(--surface-variant)}
+.rounded-sm{border-radius:var(--radius-sm)}.rounded-md{border-radius:var(--radius-md)}.rounded-lg{border-radius:var(--radius-lg)}.rounded-xl{border-radius:var(--radius-xl)}.rounded-full{border-radius:var(--radius-full)}
+.shadow-sm{box-shadow:var(--shadow-sm)}.shadow-md{box-shadow:var(--shadow-md)}.shadow-lg{box-shadow:var(--shadow-lg)}.shadow-xl{box-shadow:var(--shadow-xl)}
+.glass-panel{background:rgba(255,255,255,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--outline-variant)}
+@media(prefers-color-scheme:dark){.glass-panel{background:rgba(31,26,26,0.8)}}
+.transition-fast{transition:all var(--duration-fast) var(--ease-standard)}.transition-med{transition:all var(--duration-med) var(--ease-standard)}.transition-long{transition:all var(--duration-long) var(--ease-standard)}
+.flex{align-items:center;display:flex;gap:var(--space-3)}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:var(--space-1)}.gap-2{gap:var(--space-2)}.gap-3{gap:var(--space-3)}.gap-4{gap:var(--space-4)}.gap-5{gap:var(--space-5)}.gap-6{gap:var(--space-6)}
+.w-full{width:100%}.h-full{height:100%}.max-w-sm{max-width:320px}.max-w-md{max-width:384px}.max-w-lg{max-width:448px}.max-w-xl{max-width:512px}.mx-auto{margin-left:auto;margin-right:auto}
+.p-4{padding:var(--space-4)}.p-6{padding:var(--space-6)}.p-8{padding:var(--space-8)}.px-4{padding-left:var(--space-4);padding-right:var(--space-4)}.px-6{padding-left:var(--space-6);padding-right:var(--space-6)}.py-4{padding-top:var(--space-4);padding-bottom:var(--space-4)}.py-8{padding-top:var(--space-8);padding-bottom:var(--space-8)}.mb-2{margin-bottom:var(--space-2)}.mb-3{margin-bottom:var(--space-3)}.mb-4{margin-bottom:var(--space-4)}.mb-6{margin-bottom:var(--space-6)}.mt-4{margin-top:var(--space-4)}.mt-6{margin-top:var(--space-6)}
+.text-center{text-align:center}.text-left{text-align:left}
+.relative{position:relative}.absolute{position:absolute}.fixed{position:fixed}.inset-0{inset:0}.z-50{z-index:50}.z-100{z-index:100}.overflow-hidden{overflow:hidden}
+.cursor-pointer{cursor:pointer}.select-none{user-select:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Animaciones */
+@keyframes fade-in-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-soft{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}10%,30%{transform:scale(1.15)}20%{transform:scale(1)}}
+@keyframes float-slow{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes rotate-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+.animate-fade-in-up{animation:fade-in-up 0.8s var(--ease-emphasized) forwards;opacity:0}
+.animate-pulse-soft{animation:pulse-soft 3s ease-in-out infinite}
+.animate-heartbeat{animation:heartbeat 2s ease-in-out infinite}
+.animate-float-slow{animation:float-slow 4s ease-in-out infinite}
+.animate-shimmer{background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);background-size:200% 100%;animation:shimmer 2s infinite}
+.delay-1{animation-delay:100ms}.delay-2{animation-delay:200ms}.delay-3{animation-delay:300ms}.delay-4{animation-delay:400ms}.delay-5{animation-delay:500ms}
+.stagger-reveal{opacity:0;animation:fade-in-up 0.6s var(--ease-emphasized) forwards}
+@media(prefers-reduced-motion:reduce){.animate-fade-in-up,.animate-pulse-soft,.animate-heartbeat,.animate-float-slow,.stagger-reveal{animation:none!important;opacity:1!important}html{scroll-behavior:auto}}
+
+/* ===== LAYOUT BASE ===== */
+.page{min-height:100dvh;display:flex;flex-direction:column;background:var(--grad-bg)}
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* Top App Bar */
+.top-app-bar{position:sticky;top:0;z-index:50;padding:var(--space-4) var(--space-5);background:var(--backdrop-light);backdrop-filter:blur(20px);border-bottom:1px solid var(--outline-variant)}
+@media(prefers-color-scheme:dark){.top-app-bar{background:var(--backdrop-dark)}}
+.top-app-bar-inner{max-width:720px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:var(--space-4)}
+.top-app-bar-title{font-family:var(--font-display);font-size:var(--text-headline-sm);font-weight:500;color:var(--primary);white-space:nowrap}
+.top-app-bar-actions{display:flex;align-items:center;gap:var(--space-2)}
+.icon-btn{width:44px;height:44px;border-radius:var(--radius-full);background:var(--surface-variant);border:1px solid var(--outline-variant);display:flex;align-items:center;justify-content:center;color:var(--on-surface);cursor:pointer;transition:all var(--duration-fast) var(--ease-standard)}
+.icon-btn:hover{background:var(--outline-variant);transform:scale(1.05)}
+.icon-btn.playing .vinyl{animation:rotate-slow 3s linear infinite}
+.icon-btn.paused .vinyl{animation-play-state:paused}
+.vinyl{width:28px;height:28px;background:var(--vinyl-bg);border-radius:50%;border:3px solid var(--vinyl-border);position:relative;box-shadow:inset 0 -2px 4px rgba(0,0,0,0.3),0 2px 4px rgba(0,0,0,0.2)}
+.vinyl::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:var(--vinyl-center);border-radius:50%;box-shadow:inset 0 -1px 2px rgba(0,0,0,0.3)}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:18px;height:18px;border:1px solid var(--vinyl-ring);border-radius:50%}
+
+/* Main Content */
+main{flex:1;padding:var(--space-5) var(--space-4) calc(var(--space-10)+var(--safe-bottom));max-width:720px;width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;z-index:1;position:relative}
+@media(min-width:768px){main{padding-left:var(--space-8);padding-right:var(--space-8);margin:0 auto}}
+.section-gap{gap:var(--space-10)}
+@media(max-width:767px){.section-gap{gap:var(--space-8)}}
+
+/* ===== SECCIÓN 1: HERO + CONTADOR + POLAROID + HILO SVG ===== */
+.hero-section{width:100%;display:flex;flex-direction:column;align-items:center;gap:var(--space-6);text-align:center}
+.counter-card{background:var(--grad-counter);border:1px solid rgba(201,74,74,0.15);border-radius:var(--radius-xl);padding:var(--space-5) var(--space-6);width:100%;max-width:380px;position:relative;overflow:hidden}
+.counter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--primary))}
+@media(prefers-color-scheme:dark){
+  .counter-card{background:var(--grad-counter)}
+  .counter-card::before{background:linear-gradient(90deg,var(--primary),var(--secondary),var(--primary))}
+}
+.counter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-2)}
+.counter-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.counter-value{font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:600;color:var(--primary);line-height:1}
+.counter-label{font-size:var(--text-label);font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--on-surface-variant)}
+
+/* Polaroid */
+.polaroid-wrapper{position:relative;display:inline-block}
+.polaroid-frame{background:#fff;border:1px solid var(--outline);border-bottom-width:var(--space-6);border-radius:var(--radius-sm) var(--radius-sm) 0 0;box-shadow:var(--shadow-xl);padding:var(--space-3);max-width:100%}
+.polaroid-photo{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius-sm);display:block}
+.polaroid-caption{font-family:var(--font-display);font-size:var(--text-body);font-weight:500;color:var(--on-surface);text-align:center;margin-top:var(--space-3)}
+.polaroid-date{font-size:var(--text-caption);color:var(--on-surface-variant);margin-top:2px}
+
+/* SVG Hilo Rojo */
+.thread-svg{width:100%;max-width:380px;height:auto;display:block;margin-top:var(--space-4)}
+.thread-path{stroke:var(--thread-color);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px var(--thread-glow));animation:thread-pulse 3s ease-in-out infinite}
+@keyframes thread-pulse{0%,100%{stroke-width:2.5;filter:drop-shadow(0 0 6px var(--thread-glow))}50%{stroke-width:3.5;filter:drop-shadow(0 0 12px var(--thread-glow-strong))}}
+.thread-ring{fill:none;stroke:var(--thread-color);stroke-width:2.5;filter:drop-shadow(0 0 6px var(--thread-glow));animation:ring-pulse 2s ease-in-out infinite}
+@keyframes ring-pulse{0%,100%{transform:scale(1);transform-origin:center}50%{transform:scale(1.08);transform-origin:center}}
+.thread-dot{fill:var(--thread-color);animation:dot-blink 1.5s ease-in-out infinite}
+@keyframes dot-blink{0%,100%{opacity:1}50%{opacity:0.5}}
+.thread-label{font-family:var(--font-display);font-size:var(--text-body-sm);fill:var(--on-surface-variant);text-anchor:middle}
+
+/* ===== SECCIÓN 2: LEYENDA ===== */
+.legend-section{width:100%;max-width:560px}
+.legend-card{background:var(--surface);border:1px solid var(--outline);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center}
+.legend-title{font-family:var(--font-display);font-size:var(--text-headline);font-weight:500;color:var(--primary);margin-bottom:var(--space-3);display:flex;align-items:center;justify-content:center;gap:var(--space-2)}
+.legend-title::before,.legend-title::after{content:'';width:40px;height:1px;background:var(--grad-letter-divider)}
+.legend-text{font-size:var(--text-body);line-height:1.8;color:var(--on-surface-variant)}
+.legend-text .highlight{color:var(--primary);font-weight:500;font-style:italic}
+
+/* ===== SECCIÓN 3: BOTÓN DESCÚBRELO ===== */
+.discover-section{width:100%;max-width:380px}
+.btn-descubrelo{width:100%;padding:var(--space-5) var(--space-8);background:var(--primary);color:var(--on-primary);font-family:var(--font-display);font-size:var(--text-headline-sm);font-weight:500;border:none;border-radius:var(--radius-full);cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--shadow-lg),0 0 0 0 var(--thread-glow);animation:btn-pulse 2.5s ease-in-out infinite}
+@keyframes btn-pulse{0%,100%{box-shadow:var(--shadow-lg),0 0 0 0 var(--thread-glow)}50%{box-shadow:var(--shadow-lg),0 0 0 16px transparent}}
+.btn-descubrelo:hover{background:var(--primary-hover);transform:translateY(-2px);box-shadow:var(--shadow-xl),0 0 30px var(--thread-glow)}
+.btn-descubrelo:active{transform:translateY(0)}
+.btn-descubrelo:focus-visible{outline:2px solid var(--secondary);outline-offset:3px}
+.btn-shine{position:absolute;inset:0;background:var(--grad-btn-shine);transform:translateX(-100%);transition:transform 0.7s ease}
+.btn-descubrelo:hover .btn-shine{transform:translateX(100%)}
+
+/* ===== SECCIÓN 4: VIDEO VERTICAL (Thumbnail) ===== */
+.video-section{width:100%;max-width:320px}
+.video-thumb{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-xl);border:1px solid var(--outline-variant);aspect-ratio:9/16;cursor:pointer;background:var(--surface-variant)}
+.video-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.video-overlay{position:absolute;inset:0;background:var(--video-overlay-bg);display:flex;align-items:center;justify-content:center;transition:opacity var(--duration-med)}
+.play-btn{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.95);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow-lg);transform:scale(1);transition:transform var(--duration-fast) var(--ease-spring)}
+.play-btn svg{width:28px;height:28px;color:var(--primary);margin-left:3px}
+.play-btn:hover{transform:scale(1.1);background:#fff}
+.video-caption{position:absolute;bottom:0;left:0;right:0;padding:var(--space-4);background:var(--grad-video-caption);color:#fff;font-size:var(--text-body-sm);line-height:1.5;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+
+/* ===== SECCIÓN 5: CARTA TEASER ===== */
+.letter-teaser-section{width:100%;max-width:400px}
+.letter-teaser-btn{width:100%;background:var(--surface);border:1px solid var(--outline);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center;cursor:pointer;transition:all var(--duration-med)}
+.letter-teaser-btn:hover{background:var(--surface-variant);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.letter-teaser-btn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.envelope-img{width:72px;height:auto;margin-bottom:var(--space-3);filter:drop-shadow(0 8px 24px rgba(0,0,0,0.12));transition:transform var(--duration-long) var(--ease-spring)}
+@media(prefers-color-scheme:dark){
+  .envelope-img{filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4))}
+}
+.letter-teaser-btn:hover .envelope-img{transform:scale(1.05) rotate(-2deg)}
+.teaser-title{font-family:var(--font-display);font-size:var(--text-headline-sm);font-weight:500;color:var(--primary);margin-bottom:var(--space-1)}
+.teaser-sub{font-size:var(--text-body-sm);color:var(--on-surface-variant)}
+
+/* ===== LETTER MODAL (Full-screen) ===== */
+.letter-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--duration-long) var(--ease-standard),visibility var(--duration-long) var(--ease-standard);padding:var(--space-4)}
+.letter-modal.open{opacity:1;visibility:visible}
+.letter-modal-backdrop{position:absolute;inset:0;background:var(--modal-backdrop);backdrop-filter:blur(8px)}
+.letter-modal-content{position:relative;z-index:1;width:100%;max-width:420px;max-height:90vh;overflow-y:auto}
+.letter-paper{background:var(--paper-bg);border:1px solid var(--paper-border);border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);padding:var(--space-8);position:relative;min-height:500px;display:flex;flex-direction:column}
+.letter-close{position:absolute;top:var(--space-4);right:var(--space-4);width:40px;height:40px;border-radius:var(--radius-full);background:var(--surface-variant);border:1px solid var(--outline-variant);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--on-surface-variant);transition:all var(--duration-fast)}
+.letter-close:hover{background:var(--outline-variant);color:var(--on-surface);transform:rotate(90deg)}
+.wax-seal-float{position:absolute;bottom:-30px;left:-30px;width:80px;height:80px;pointer-events:none;animation:float-slow 3s ease-in-out infinite}
+.wax-seal-float img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 24px var(--thread-glow))}
+.letter-content{flex:1;display:flex;flex-direction:column;justify-content:center;gap:var(--space-5);text-align:center}
+.letter-divider{width:60px;height:1px;background:var(--grad-letter-divider);margin:0 auto}
+.letter-text{font-family:var(--font-display);font-size:var(--text-body);line-height:1.9;color:var(--on-surface);white-space:pre-line}
+.letter-signature{font-family:var(--font-display);font-size:var(--text-body);font-weight:500;font-style:italic;color:var(--primary);margin-top:var(--space-2)}
+.letter-bottom{display:flex;align-items:center;justify-content:center;gap:var(--space-3);margin-top:var(--space-4);padding-top:var(--space-4);border-top:1px solid var(--grad-bottom-border)}
+.letter-bottom-line{flex:1;height:1px;background:var(--grad-bottom-border);max-width:80px}
+.letter-bottom-heart{font-size:1.25rem;color:var(--primary);animation:heartbeat 1.5s ease-in-out infinite}
+
+/* ===== VIDEO MODAL FULLSCREEN ===== */
+.video-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--duration-long),visibility var(--duration-long)}
+.video-modal.open{opacity:1;visibility:visible}
+.video-modal-backdrop{position:absolute;inset:0;background:var(--video-backdrop);opacity:var(--video-backdrop-opacity)}
+.video-modal-content{position:relative;z-index:1;width:100%;height:100%;max-width:420px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.video-player-wrapper{width:100%;height:100%;display:flex;flex-direction:column}
+.modal-video{width:100%;height:100%;object-fit:cover}
+.video-modal-caption{position:absolute;bottom:0;left:0;right:0;padding:var(--space-6);background:var(--grad-modal-caption);padding-bottom:5rem}
+.video-close{position:absolute;top:var(--space-5);left:var(--space-4);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--duration-fast);z-index:10}
+.video-close:hover{background:rgba(255,255,255,0.3);transform:scale(1.1)}
+
+/* ===== FOOTER ===== */
+footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);text-transform:uppercase;letter-spacing:0.15em;color:var(--on-surface-variant);font-weight:500}
+
+/* ===== SELECTION ===== */
+::selection{background:var(--selection-bg);color:var(--selection-fg)}
+
+/* ===== REDUCED MOTION ===== */
+@media(prefers-reduced-motion:reduce){
+  .animate-fade-in-up,.animate-pulse-soft,.animate-heartbeat,.animate-float-slow,.stagger-reveal,.btn-descubrelo,.play-btn,.envelope-img,.thread-path,.thread-ring,.thread-dot,.vinyl,.wax-seal-float,.letter-close,.video-close{animation:none!important;transition:none!important;opacity:1!important}
+  .balloon-group ellipse, .balloon-group path, .candles rect, .candles ellipse, .confetti circle, .gifts rect, .gifts ellipse{animation:none!important;opacity:1!important}
+  html{scroll-behavior:auto}
+}
+  </style>
+</head>
+<body>
+  <!-- Canvas WebGL Shader Background -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Top App Bar -->
+  <header class="top-app-bar" role="banner">
+    <div class="top-app-bar-inner">
+      <span class="top-app-bar-title" id="headerDate">18 / 03 / 2022</span>
+      <div class="top-app-bar-actions">
+        <button id="audioToggle" class="icon-btn" aria-label="Activar música" aria-pressed="false" title="Música de fondo">
+          <div class="vinyl" aria-hidden="true"></div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Audio Background -->
+  <audio id="bgMusic" src="./musica.mp3" loop preload="auto"></audio>
+
+  <main class="section-gap">
+    <!-- SECCIÓN 1: HERO + CONTADOR + POLAROID + HILO SVG -->
+    <section id="heroSection" class="hero-section animate-fade-in-up">
+      <!-- Contador -->
+      <div class="counter-card" role="region" aria-label="Tiempo juntos">
+        <div class="counter-grid">
+          <div class="counter-item">
+            <span class="counter-value" id="counterDays">0</span>
+            <span class="counter-label">Días</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-value" id="counterHours">0</span>
+            <span class="counter-label">Horas</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-value" id="counterMinutes">0</span>
+            <span class="counter-label">Min</span>
+          </div>
+          <div class="counter-item">
+            <span class="counter-value" id="counterSeconds">0</span>
+            <span class="counter-label">Seg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Polaroid -->
+      <div class="polaroid-wrapper animate-fade-in-up delay-1" style="animation-delay: 100ms;">
+        <div class="polaroid-frame">
+          <!-- FOTO_PRINCIPAL desde carpeta imagenes/ -->
+          <img id="polaroidPhoto" class="polaroid-photo" src="./imagenes/principal.jpg?v=2" alt="Lowel & Yazari" loading="eager">
+        </div>
+        <p class="polaroid-caption" id="coupleNames">Lowel & Yazari</p>
+        <p class="polaroid-date" id="anniversaryDate">05 / 09 / 2000</p>
+      </div>
+
+      <!-- SVG Cumpleaños (Visual festivo) -->
+      <svg class="thread-svg animate-fade-in-up delay-2" style="animation-delay: 200ms;" viewBox="0 0 380 180" aria-labelledby="birthdayTitle" role="img">
+        <title id="birthdayTitle">Feliz Cumpleaños Yazari - Celebración con globos, pastel y regalos</title>
+        <defs>
+          <linearGradient id="balloonGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E57373;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#C94A4A;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="balloonGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#E8C56D;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="balloonGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#81C784;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="balloonGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2196F3;stop-opacity:1" />
+          </linearGradient>
+          <linearGradient id="balloonGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#BA68C8;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Globos decorativos flotando -->
+        <g class="balloon-group" filter="url(#glow)">
+          <!-- Globo 1 - Rojo -->
+          <ellipse cx="60" cy="120" rx="22" ry="28" fill="url(#balloonGrad1)" opacity="0.9">
+            <animate attributeName="cy" values="120;110;120" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+          </ellipse>
+          <path d="M60 148 Q60 155 55 162 Q60 155 60 148" stroke="#C94A4A" stroke-width="2" fill="none" opacity="0.7"/>
+          <ellipse cx="60" cy="102" rx="4" ry="3" fill="#fff" opacity="0.4"/>
+
+          <!-- Globo 2 - Dorado -->
+          <ellipse cx="130" cy="100" rx="20" ry="26" fill="url(#balloonGrad2)" opacity="0.9">
+            <animate attributeName="cy" values="100;92;100" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+          </ellipse>
+          <path d="M130 126 Q130 132 135 139 Q130 132 130 126" stroke="#D4AF37" stroke-width="2" fill="none" opacity="0.7"/>
+          <ellipse cx="130" cy="83" rx="3.5" ry="2.5" fill="#fff" opacity="0.4"/>
+
+          <!-- Globo 3 - Verde -->
+          <ellipse cx="200" cy="115" rx="24" ry="30" fill="url(#balloonGrad3)" opacity="0.9">
+            <animate attributeName="cy" values="115;105;115" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+          </ellipse>
+          <path d="M200 145 Q200 152 195 159 Q200 152 200 145" stroke="#4CAF50" stroke-width="2" fill="none" opacity="0.7"/>
+          <ellipse cx="200" cy="96" rx="4" ry="3" fill="#fff" opacity="0.4"/>
+
+          <!-- Globo 4 - Azul -->
+          <ellipse cx="270" cy="95" rx="22" ry="28" fill="url(#balloonGrad4)" opacity="0.9">
+            <animate attributeName="cy" values="95;87;95" dur="2.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+          </ellipse>
+          <path d="M270 123 Q270 130 275 137 Q270 130 270 123" stroke="#2196F3" stroke-width="2" fill="none" opacity="0.7"/>
+          <ellipse cx="270" cy="78" rx="3.5" ry="2.5" fill="#fff" opacity="0.4"/>
+
+          <!-- Globo 5 - Púrpura -->
+          <ellipse cx="340" cy="110" rx="20" ry="26" fill="url(#balloonGrad5)" opacity="0.9">
+            <animate attributeName="cy" values="110;102;110" dur="3.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"/>
+          </ellipse>
+          <path d="M340 136 Q340 143 335 150 Q340 143 340 136" stroke="#9C27B0" stroke-width="2" fill="none" opacity="0.7"/>
+          <ellipse cx="340" cy="93" rx="3.5" ry="2.5" fill="#fff" opacity="0.4"/>
+        </g>
+
+        <!-- Pastel de cumpleaños central -->
+        <g class="cake-group" transform="translate(190, 170)">
+          <!-- Base del pastel -->
+          <ellipse cx="0" cy="0" rx="55" ry="18" fill="#FFF8F3" stroke="#E8DDD4" stroke-width="2"/>
+          <ellipse cx="0" cy="-35" rx="55" ry="18" fill="#FFF8F3" stroke="#E8DDD4" stroke-width="2"/>
+          <path d="M-55,0 L-55,-35 M55,0 L55,-35" stroke="#E8DDD4" stroke-width="2" fill="none"/>
+          <!-- Capa de crema -->
+          <ellipse cx="0" cy="-35" rx="55" ry="18" fill="#FFF0F0" opacity="0.8"/>
+          <path d="M-40,-35 Q-30,-50 -20,-35 Q-10,-50 0,-35 Q10,-50 20,-35 Q30,-50 40,-35" stroke="#E57373" stroke-width="2" fill="none" opacity="0.6"/>
+          <!-- Velas -->
+          <g class="candles">
+            <rect x="-35" y="-70" width="6" height="35" rx="2" fill="#C94A4A">
+              <animate attributeName="height" values="35;30;35" dur="1.5s" repeatCount="indefinite"/>
+            </rect>
+            <ellipse cx="-32" cy="-70" rx="4" ry="4" fill="#FFD700">
+              <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="-32" cy="-74" rx="3" ry="2" fill="#FF6B6B"/>
+
+            <rect x="-12" y="-75" width="6" height="40" rx="2" fill="#E57373">
+              <animate attributeName="height" values="40;35;40" dur="1.3s" repeatCount="indefinite"/>
+            </rect>
+            <ellipse cx="-9" cy="-75" rx="4" ry="4" fill="#FFD700">
+              <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="-9" cy="-79" rx="3" ry="2" fill="#FF6B6B"/>
+
+            <rect x="11" y="-70" width="6" height="35" rx="2" fill="#C94A4A">
+              <animate attributeName="height" values="35;30;35" dur="1.7s" repeatCount="indefinite"/>
+            </rect>
+            <ellipse cx="14" cy="-70" rx="4" ry="4" fill="#FFD700">
+              <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="14" cy="-74" rx="3" ry="2" fill="#FF6B6B"/>
+
+            <rect x="34" y="-75" width="6" height="40" rx="2" fill="#E57373">
+              <animate attributeName="height" values="40;35;40" dur="1.4s" repeatCount="indefinite"/>
+            </rect>
+            <ellipse cx="37" cy="-75" rx="4" ry="4" fill="#FFD700">
+              <animate attributeName="opacity" values="1;0.5;1" dur="0.5s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="37" cy="-79" rx="3" ry="2" fill="#FF6B6B"/>
+          </g>
+          <!-- Detalle de la base -->
+          <ellipse cx="0" cy="25" rx="55" ry="8" fill="#FFF8F3" stroke="#E8DDD4" stroke-width="2" fill-opacity="0.5"/>
+        </g>
+
+        <!-- Nombre YAZARI prominente -->
+        <text class="birthday-name" x="190" y="45" text-anchor="middle" font-family="var(--font-display)" font-size="32" font-weight="500" fill="var(--primary)">
+          Yazari
+        </text>
+        <text class="birthday-sub" x="190" y="70" text-anchor="middle" font-family="var(--font-body)" font-size="14" font-weight="400" fill="var(--on-surface-variant)">
+          ¡Feliz Cumpleaños!
+        </text>
+
+        <!-- Confeti/estrellas decorativas -->
+        <g class="confetti" opacity="0.7">
+          <circle cx="30" cy="30" r="3" fill="#E57373"><animate attributeName="cy" values="30;180;30" dur="4s" repeatCount="indefinite"/></circle>
+          <circle cx="80" cy="20" r="2" fill="#D4AF37"><animate attributeName="cy" values="20;180;20" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="150" cy="40" r="2.5" fill="#81C784"><animate attributeName="cy" values="40;180;40" dur="4.2s" repeatCount="indefinite"/></circle>
+          <circle cx="250" cy="15" r="3" fill="#64B5F6"><animate attributeName="cy" values="15;180;15" dur="3.8s" repeatCount="indefinite"/></circle>
+          <circle cx="320" cy="25" r="2" fill="#BA68C8"><animate attributeName="cy" values="25;180;25" dur="4.5s" repeatCount="indefinite"/></circle>
+          <circle cx="360" cy="35" r="2.5" fill="#E57373"><animate attributeName="cy" values="35;180;35" dur="3.2s" repeatCount="indefinite"/></circle>
+        </g>
+
+        <!-- Regalos pequeños abajo -->
+        <g class="gifts">
+          <rect x="80" y="145" width="28" height="22" rx="3" fill="#E57373" stroke="#C94A4A" stroke-width="1"/>
+          <rect x="88" y="145" width="12" height="22" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <rect x="80" y="153" width="28" height="14" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <ellipse cx="94" y="140" rx="6" ry="4" fill="#FFD700"/>
+
+          <rect x="270" y="145" width="26" height="20" rx="3" fill="#64B5F6" stroke="#2196F3" stroke-width="1"/>
+          <rect x="278" y="145" width="10" height="20" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <rect x="270" y="151" width="26" height="14" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <ellipse cx="283" y="140" rx="5" ry="3.5" fill="#FFD700"/>
+
+          <rect x="175" y="150" width="30" height="24" rx="3" fill="#BA68C8" stroke="#9C27B0" stroke-width="1"/>
+          <rect x="185" y="150" width="10" height="24" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <rect x="175" y="158" width="30" height="16" fill="none" stroke="#FFD700" stroke-width="2"/>
+          <ellipse cx="190" y="145" rx="6" ry="4" fill="#FFD700"/>
+        </g>
+      </svg>
+    </section>
+
+    <!-- SECCIÓN 2: MENSAJE ESPECIAL -->
+    <section id="legendSection" class="legend-section animate-fade-in-up delay-2" style="animation-delay: 200ms;">
+      <article class="legend-card">
+        <h2 class="legend-title font-display">Para Yazari en su Cumpleaños</h2>
+        <p class="legend-text">
+          Hoy celebro no solo tu cumpleaños, sino <span class="highlight\">nuestra relación</span> y lo afortunado que soy de tenerte a mi lado.
+          Cada año a tu lado es un regalo, y <span class="highlight\">deseo que sean muchísimos más</span> compartiendo risas, sueños y momentos únicos.
+          Gracias por ser mi compañera, mi amiga, mi todo.
+        </p>
+      </article>
+    </section>
+
+    <!-- SECCIÓN 3: BOTÓN DESCÚBRELO -->
+    <section id="discoverSection" class="discover-section animate-fade-in-up delay-3" style="animation-delay: 300ms;">
+      <button id="btnDescubrelo" class="btn-descubrelo" aria-label="Descubrir nuestra historia">
+        <span>DESCÚBRELO</span>
+        <span class="btn-shine" aria-hidden="true"></span>
+      </button>
+    </section>
+
+    <!-- SECCIÓN 4: VIDEO VERTICAL (Hidden initially, shown after video modal closes) -->
+    <section id="videoSection" class="video-section" style="display: none;">
+      <div class="video-thumb" role="button" tabindex="0" aria-label="Ver video de cumpleaños en pantalla completa" onclick="openVideoModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal();}">
+        <!-- VIDEO_RECUERDOS.mp4 generado desde carpeta imagenes/ -->
+        <video id="memoryVideo" playsinline muted preload="metadata" poster="./imagenes/principal.jpg?v=2">
+          <source src="./video.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+        <div class="video-overlay">
+          <button class="play-btn" aria-label="Reproducir en pantalla completa" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="video-caption">
+          Feliz Cumpleaños Amor Mío
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: CARTA TEASER (Hidden initially, shown after video modal closes) -->
+    <section id="letterTeaser" class="letter-teaser-section" style="display: none;">
+      <button id="openLetterBtn" class="letter-teaser-btn" aria-label="Abrir carta de amor">
+        <!-- Imagen del sobre sellado -->
+        <img class="envelope-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8OEith_nhDIde1Y5tJwleSFfBRw7d6v3ezrlfnclNPXi-6iQs6iL3TWKtaf0owBjaNU-Uxdiyu_Fg0dL7sMuhSFKpeR__ULCeY6UWH1E_jUuVIIVK_h2cB2C1n0X1DJrTv93pO7CmdAeGMT0VoMTK2ePBs6FCdyr9Oy1CuTZgb9aVz35mulH9j0QrpXtEt_yvGcEC3IU0BRHP5LQq3qxaa5-MTlBWrdAJoZCKX3sYPgmFdBraPDKJ_Q" alt="Sobre sellado con sello de cera" loading="lazy">
+        <p class="teaser-title">Toca para abrir</p>
+        <p class="teaser-sub">nuestra carta</p>
+      </button>
+    </section>
+  </main>
+
+  <!-- ===== LETTER MODAL (Full-screen) ===== -->
+  <div id="letterModal" class="letter-modal" role="dialog" aria-modal="true" aria-labelledby="letterTitle" aria-describedby="letterDesc">
+    <div class="letter-modal-backdrop" tabindex="-1" aria-hidden="true" onclick="closeLetter()"></div>
+    <div class="letter-modal-content">
+      <article class="letter-paper">
+        <button id="closeLetterBtn" class="letter-close" aria-label="Cerrar carta">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">close</span>
+        </button>
+
+        <!-- Sello de cera roto flotando -->
+        <div class="wax-seal-float" aria-hidden="true">
+          <img alt="Sello de cera carmesí roto" src="https://lh3.googleusercontent.com/aida/AEtjO1UZzPil8sQXbs-enGbAvzZIjWRresWkaT3r9dKKQnftpGYJNb2QD3z0D3jGmLimbaPpDAZdjBD9LCa4FSfGG5HY-xXsTH3qq7d6Sds55Sn0-3ErXf1dAETsvY-UV_wnXZzMmRuYeq7-1N0biS8R_Na0yPsw5BelsUBLQQ208RRYQRZYNkPbYKTq7tGrkLdb3C4Y5ZFb2KPN4MLQH_4-hZZeSAJPmiR8Nl1GhH6V1INzr5Woi2UbFlRDvVzA"/>
+        </div>
+
+        <!-- Contenido -->
+        <div class="letter-content">
+          <div class="letter-divider stagger-reveal delay-1"></div>
+          <!-- REEMPLAZAR AQUÍ: TEXTO_CARTA -->
+          <p class="letter-text stagger-reveal delay-1" id="letterText"></p>
+          <!-- REEMPLAZAR AQUÍ: FIRMA_CARTA -->
+          <p class="letter-signature stagger-reveal delay-2" id="letterSignature"></p>
+          <div class="letter-bottom stagger-reveal delay-3">
+            <div class="letter-bottom-line"></div>
+            <span class="material-symbols-outlined letter-bottom-heart">favorite</span>
+            <div class="letter-bottom-line"></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ===== VIDEO MODAL FULLSCREEN ===== -->
+  <div id="videoModal" class="video-modal" role="dialog" aria-modal="true" aria-label="Video de cumpleaños">
+    <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
+    <div class="video-modal-content">
+      <div class="video-player-wrapper">
+        <video id="modalVideo" playsinline controls preload="metadata" class="modal-video" muted>
+          <source src="./video.mp4" type="video/mp4">
+        </video>
+        <div class="video-modal-caption">
+          <p class="font-headline-sm text-headline-sm text-white text-glow mb-2">Feliz Cumpleaños Amor Mío</p>
+          <p class="font-body-md text-body-md text-white/90">Gracias a Dios por compartir tu vida conmigo, te deseo que sean muchos años más juntos</p>
+        </div>
+      </div>
+      <button class="video-close" onclick="closeVideoModal()" aria-label="Cerrar video">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Hecho con amor Lowel
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+/* ===== CONFIGURACIÓN CENTRALIZADA ===== */
+// REEMPLAZAR AQUÍ: FECHA_ANIVERSARIO (Formato: AAAA-MM-DD) - Para contador "Tiempo juntos" (ahora desde su nacimiento)
+const ANNIVERSARY_DATE = '2000-09-05';
+// REEMPLAZAR AQUÍ: FECHA_CUMPLEAÑOS (Formato: DD/MM/AAAA) - Para mostrar en polaroid
+const BIRTHDAY_DATE = '05/09/2000';
+// REEMPLAZAR AQUÍ: NOMBRES_PAREJA
+const COUPLE_NAMES = 'Lowel & Yazari';
+// REEMPLAZAR AQUÍ: TEXTO_CARTA
+const LETTER_TEXT = `Yazari:
+
+Hoy en tu cumpleaños quiero que sepas lo mucho que significa nuestra relación para mí. No eres solo mi pareja, eres mi mejor amiga, mi confidente, mi todo.
+
+Gracias por cada risa inesperada, por cada silencio cómodo, por cada "aquí estoy" sin que tuviera que pedirlo. Contigo descubrí que el amor no es un destino, es un camino que se recorre de la mano, y no hay nadie más con quien quiera recorrer el mío.
+
+No prometo una vida perfecta, pero sí una vida juntos. No prometo días fáciles, pero sí días reales, llenos de nosotros. Tú eres mi puerto y mi aventura, mi calma y mi locura favorita.
+
+Si el mundo se mueve, yo me quedo contigo. Si el tiempo pasa, que sea a tu lado. Y si hay un mañana, quiero que empiece igual: con tu sonrisa y nuestra relación intacta, creciendo pero nunca rompiéndose.
+
+Te amo con lo que soy y con lo que seré.`;
+// REEMPLAZAR AQUÍ: FIRMA_CARTA
+const LETTER_SIGNATURE = 'Con todo mi amor, Lowel.';
+
+/* ===== ESTADO ===== */
+let hasInteracted = false;
+let musicStarted = false;
+let letterOpened = false;
+let counterInterval = null;
+let fadeInterval = null;
+
+/* ===== DOM ELEMENTS ===== */
+const audioToggle = document.getElementById('audioToggle');
+const bgMusic = document.getElementById('bgMusic');
+const btnDescubrelo = document.getElementById('btnDescubrelo');
+const memoryVideo = document.getElementById('memoryVideo');
+const videoPlayBtn = document.getElementById('videoPlayBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const openLetterBtn = document.getElementById('openLetterBtn');
+const letterModal = document.getElementById('letterModal');
+const closeLetterBtn = document.getElementById('closeLetterBtn');
+const headerDate = document.getElementById('headerDate');
+const anniversaryDateEl = document.getElementById('anniversaryDate');
+const coupleNamesEl = document.getElementById('coupleNames');
+const polaroidPhoto = document.getElementById('polaroidPhoto');
+const letterTextEl = document.getElementById('letterText');
+const letterSignatureEl = document.getElementById('letterSignature');
+
+/* ===== INIT TEXTS ===== */
+function initTexts() {
+  const [y, m, d] = ANNIVERSARY_DATE.split('-');
+  const formatted = `${d} / ${m} / ${y}`;
+  // Header date = fecha de aniversario (tiempo juntos)
+  if (headerDate) headerDate.textContent = formatted;
+  // Polaroid date = fecha de cumpleaños
+  if (anniversaryDateEl) anniversaryDateEl.textContent = BIRTHDAY_DATE;
+  if (coupleNamesEl) coupleNamesEl.textContent = COUPLE_NAMES;
+  if (letterTextEl) letterTextEl.textContent = LETTER_TEXT;
+  if (letterSignatureEl) letterSignatureEl.textContent = LETTER_SIGNATURE;
+  document.title = `Feliz Cumpleaños Yazari - ${COUPLE_NAMES}`;
+}
+initTexts();
+
+/* ===== 1. CONTADOR EN TIEMPO REAL ===== */
+function startLiveCounter() {
+  const start = new Date(ANNIVERSARY_DATE + 'T00:00:00');
+  const update = () => {
+    const now = new Date();
+    let diff = now - start;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+    const elDays = document.getElementById('counterDays');
+    const elHours = document.getElementById('counterHours');
+    const elMinutes = document.getElementById('counterMinutes');
+    const elSeconds = document.getElementById('counterSeconds');
+    if (elDays) elDays.textContent = days;
+    if (elHours) elHours.textContent = String(hours).padStart(2, '0');
+    if (elMinutes) elMinutes.textContent = String(minutes).padStart(2, '0');
+    if (elSeconds) elSeconds.textContent = String(seconds).padStart(2, '0');
+  };
+  update();
+  counterInterval = setInterval(update, 1000);
+}
+startLiveCounter();
+
+/* ===== 2. AUDIO CON AUTOPLAY + FADE-IN/FADE-OUT ===== */
+function fadeInAudio() {
+  if (!bgMusic) return;
+  bgMusic.volume = 0;
+  bgMusic.muted = false;
+  const playPromise = bgMusic.play();
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      musicStarted = true;
+      audioToggle.classList.remove('paused');
+      audioToggle.classList.add('playing');
+      audioToggle.setAttribute('aria-pressed', 'true');
+      audioToggle.setAttribute('aria-label', 'Pausar música de fondo');
+      fadeInterval = setInterval(() => {
+        if (bgMusic.volume < 0.5) {
+          bgMusic.volume = Math.min(0.5, bgMusic.volume + 0.02);
+        } else {
+          clearInterval(fadeInterval);
+        }
+      }, 100);
+    }).catch(() => {
+      // Fallback - will need user interaction
+    });
+  }
+}
+
+function tryAutoplayMusic() {
+  fadeInAudio();
+}
+
+function fadeOutAudio() {
+  if (!bgMusic) return;
+  clearInterval(fadeInterval);
+  fadeInterval = setInterval(() => {
+    if (bgMusic.volume > 0.02) {
+      bgMusic.volume = Math.max(0, bgMusic.volume - 0.03);
+    } else {
+      bgMusic.pause();
+      bgMusic.volume = 0.5;
+      clearInterval(fadeInterval);
+    }
+  }, 80);
+}
+function toggleAudio() {
+  if (!bgMusic) return;
+  hasInteracted = true;
+  if (bgMusic.paused) {
+    fadeInAudio();
+  } else {
+    fadeOutAudio();
+    audioToggle.classList.add('paused');
+    audioToggle.classList.remove('playing');
+    audioToggle.setAttribute('aria-pressed', 'false');
+    audioToggle.setAttribute('aria-label', 'Activar música de fondo');
+  }
+}
+// Intentar autoplay inmediato al cargar
+tryAutoplayMusic();
+audioToggle.addEventListener('click', toggleAudio);
+
+/* ===== 3. BOTÓN DESCÚBRELO ===== */
+btnDescubrelo.addEventListener('click', () => {
+  hasInteracted = true;
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 120,
+      spread: 100,
+      origin: { y: 0.4 },
+      colors: ['#C94A4A', '#D32F2F', '#D4AF37', '#FFF0F0', '#FFD700'],
+      shapes: ['heart'],
+      scalar: 1.2,
+      gravity: 0.7,
+      drift: 0,
+      ticks: 200
+    });
+  }
+  if (!musicStarted && bgMusic) {
+    musicStarted = true;
+    fadeInAudio();
+    audioToggle.classList.remove('paused');
+    audioToggle.classList.add('playing');
+    audioToggle.setAttribute('aria-pressed', 'true');
+    audioToggle.setAttribute('aria-label', 'Pausar música de fondo');
+  }
+  // Abrir video modal directamente
+  openVideoModal();
+});
+
+/* ===== 4. VIDEO THUMBNAIL CLICK -> MODAL ===== */
+// El video en el landing es solo thumbnail; click abre modal fullscreen
+// (el onclick ya está en el HTML del videoSection)
+
+/* ===== 5. VIDEO MODAL ===== */
+function openVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  if (modal && modalVideo) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    modalVideo.currentTime = memoryVideo.currentTime;
+    
+    // Auto-cerrar al terminar el video y mostrar carta teaser
+    modalVideo.onended = () => {
+      closeVideoModal();
+    };
+    
+    modalVideo.play();
+  }
+}
+function closeVideoModal() {
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  if (modal && modalVideo) {
+    modal.classList.remove('open');
+    modalVideo.pause();
+    modalVideo.onended = null; // limpiar listener
+    document.body.style.overflow = '';
+    // Mostrar carta teaser con animación
+    const letterTeaser = document.getElementById('letterTeaser');
+    if (letterTeaser) {
+      letterTeaser.style.display = 'block';
+      letterTeaser.classList.add('animate-fade-in-up');
+    }
+  }
+}
+
+/* ===== LETTER MODAL ===== */
+function typeWriterEffect(element, text, speed = 45, callback) {
+  element.textContent = '';
+  element.style.whiteSpace = 'pre-line';
+  let i = 0;
+  function tick() {
+    if (i < text.length) {
+      element.textContent += text.charAt(i);
+      i++;
+      setTimeout(tick, speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+  tick();
+}
+
+function openLetter() {
+  if (letterOpened) return;
+  letterOpened = true;
+  const modal = document.getElementById('letterModal');
+  if (modal) modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
+
+  setTimeout(() => {
+    const textEl = document.getElementById('letterText');
+    const sigEl = document.getElementById('letterSignature');
+    if (textEl) typeWriterEffect(textEl, LETTER_TEXT, 45, () => {
+      if (sigEl) typeWriterEffect(sigEl, LETTER_SIGNATURE, 40);
+    });
+  }, 500);
+  const closeBtn = document.getElementById('closeLetterBtn');
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeLetter() {
+  if (!letterOpened) return;
+  letterOpened = false;
+  const modal = document.getElementById('letterModal');
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+  if (openLetterBtn) openLetterBtn.focus();
+}
+
+openLetterBtn.addEventListener('click', openLetter);
+openLetterBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLetter(); } });
+closeLetterBtn.addEventListener('click', closeLetter);
+letterModal.querySelector('.letter-modal-backdrop').addEventListener('click', closeLetter);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && letterOpened) closeLetter(); });
+
+/* ===== 7. WEBSHADER BACKGROUND (IDÉNTICO A STITCH shader_1 + THEME SUPPORT) ===== */
+const canvas = document.getElementById('bg-canvas');
+const gl = canvas.getContext('webgl', { alpha: true, antialias: true, preserveDrawingBuffer: false });
+
+if (gl) {
+  const vsSource = `
+    attribute vec2 a_position;
+    varying vec2 v_uv;
+    void main() {
+      gl_Position = vec4(a_position, 0.0, 1.0);
+      v_uv = a_position * 0.5 + 0.5;
+    }
+  `;
+  const fsSource = `
+    precision highp float;
+    varying vec2 v_uv;
+    uniform float u_time;
+    uniform vec2 u_resolution;
+    uniform vec3 u_bgColor;
+    uniform vec3 u_threadColor;
+    uniform vec3 u_goldColor;
+    uniform float u_isDark;
+
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      float a = hash(i);
+      float b = hash(i + vec2(1.0, 0.0));
+      float c = hash(i + vec2(0.0, 1.0));
+      float d = hash(i + vec2(1.0, 1.0));
+      return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+    }
+    float fbm(vec2 p) {
+      float v = 0.0, a = 0.5;
+      for (int i = 0; i < 4; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = v_uv;
+      float aspect = u_resolution.x / u_resolution.y;
+      uv.x *= aspect;
+
+      // 1. Papel texturizado (FBM noise)
+      float paper = fbm(uv * 120.0 + u_time * 0.01) * 0.03;
+      vec3 bgColor = u_bgColor + paper;
+
+      // 2. 3 Hilos rojos orgánicos con bezier animado
+      float threads = 0.0;
+      vec2 center = vec2(0.5, 0.5);
+      for (int i = 0; i < 3; i++) {
+        float offset = float(i) * 0.33 - 0.33;
+        float t = u_time * 0.3 + offset * 2.0;
+        float wave = sin(uv.y * 12.0 + t) * 0.03 + sin(uv.y * 6.0 - t * 1.5) * 0.02;
+        float threadCenter = center.x + offset + wave;
+        float dist = abs(uv.x - threadCenter);
+        float thread = smoothstep(0.012, 0.0, dist) * (0.7 + 0.3 * sin(u_time * 2.0 + float(i)));
+        threads += thread;
+      }
+      vec3 threadColor = mix(bgColor, u_threadColor, threads);
+
+      // 3. Vignette suave
+      float vignette = 1.0 - length(uv - center) * 0.6;
+      vec3 finalColor = threadColor * vignette;
+
+      // 4. Partículas doradas flotantes
+      float particles = 0.0;
+      for (int i = 0; i < 8; i++) {
+        float px = fract(sin(u_time * 0.15 + float(i) * 12.9898) * 43758.5453);
+        float py = fract(cos(u_time * 0.11 + float(i) * 78.233) * 43758.5453);
+        float pdist = length(uv - vec2(px, py) * aspect);
+        particles += smoothstep(0.02, 0.0, pdist) * (0.5 + 0.5 * sin(u_time + float(i)));
+      }
+      finalColor += particles * u_goldColor * 0.15;
+
+      gl_FragColor = vec4(finalColor, 1.0);
+    }
+  `;
+
+  function compileShader(src, type) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, src);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+      return null;
+    }
+    return shader;
+  }
+
+  const vs = compileShader(vsSource, gl.VERTEX_SHADER);
+  const fs = compileShader(fsSource, gl.FRAGMENT_SHADER);
+  if (vs && fs) {
+    const program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.useProgram(program);
+
+      const positionLoc = gl.getAttribLocation(program, 'a_position');
+      const timeLoc = gl.getUniformLocation(program, 'u_time');
+      const resLoc = gl.getUniformLocation(program, 'u_resolution');
+      const bgColorLoc = gl.getUniformLocation(program, 'u_bgColor');
+      const threadColorLoc = gl.getUniformLocation(program, 'u_threadColor');
+      const goldColorLoc = gl.getUniformLocation(program, 'u_goldColor');
+      const isDarkLoc = gl.getUniformLocation(program, 'u_isDark');
+
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(positionLoc);
+      gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+      function parseColor(cssColor) {
+        // Simple parser for rgb/rgba/hex
+        const div = document.createElement('div');
+        div.style.color = cssColor;
+        document.body.appendChild(div);
+        const computed = getComputedStyle(div).color;
+        document.body.removeChild(div);
+        const match = computed.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (match) {
+          return [parseInt(match[1])/255, parseInt(match[2])/255, parseInt(match[3])/255];
+        }
+        return [0.98, 0.97, 0.94]; // fallback
+      }
+
+      function updateThemeUniforms() {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const cs = getComputedStyle(document.documentElement);
+        const bgColor = parseColor(cs.getPropertyValue('--bg').trim());
+        const threadColor = parseColor(cs.getPropertyValue('--thread-color').trim());
+        const goldColor = parseColor(cs.getPropertyValue('--gold-color').trim());
+        gl.uniform3fv(bgColorLoc, bgColor);
+        gl.uniform3fv(threadColorLoc, threadColor);
+        gl.uniform3fv(goldColorLoc, goldColor);
+        gl.uniform1f(isDarkLoc, isDark ? 1.0 : 0.0);
+      }
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = canvas.clientWidth * dpr;
+        canvas.height = canvas.clientHeight * dpr;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Listen for theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeUniforms);
+
+      function render(time) {
+        time *= 0.001;
+        resize();
+        updateThemeUniforms();
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        gl.uniform1f(timeLoc, time);
+        gl.uniform2f(resLoc, gl.canvas.width, gl.canvas.height);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    } else {
+      console.error('Program link error:', gl.getProgramInfoLog(program));
+    }
+  }
+}
+
+/* ===== 8. PRECARGA RECURSOS LOCALES ===== */
+function preloadLocalAssets() {
+  const testImg = new Image();
+  testImg.src = './imagenes/principal.jpg?v=2';
+  testImg.onload = () => {
+    if (polaroidPhoto) polaroidPhoto.src = './imagenes/principal.jpg?v=2';
+  };
+  testImg.onerror = () => {}; // usa placeholder Unsplash
+
+  const testVideo = document.createElement('video');
+  testVideo.src = './video.mp4';
+  testVideo.onloadeddata = () => {
+    if (memoryVideo) {
+      memoryVideo.src = './video.mp4';
+      memoryVideo.poster = '';
+    }
+    const modalVideo = document.getElementById('modalVideo');
+    if (modalVideo) modalVideo.src = './video.mp4';
+  };
+  testVideo.onerror = () => {};
+
+  const testAudio = new Audio();
+  testAudio.src = './musica.mp3';
+  testAudio.oncanplaythrough = () => {
+    if (bgMusic) bgMusic.src = './musica.mp3';
+  };
+  testAudio.onerror = () => {};
+}
+preloadLocalAssets();
+
+/* ===== 9. INTERSECTION OBSERVER PARA ANIMACIONES ===== */
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('animate-fade-in-up');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.animate-fade-in-up').forEach(el => obs.observe(el));
+}
+  </script>
+</body>
+</html>
