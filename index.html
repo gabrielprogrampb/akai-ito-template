@@ -249,8 +249,7 @@ main{flex:1;padding:var(--space-5) var(--space-4) calc(var(--space-10)+var(--saf
 .letter-paper{background:var(--paper-bg);border:1px solid var(--paper-border);border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);padding:var(--space-8);position:relative;min-height:500px;display:flex;flex-direction:column}
 .letter-close{position:absolute;top:var(--space-4);right:var(--space-4);width:40px;height:40px;border-radius:var(--radius-full);background:var(--surface-variant);border:1px solid var(--outline-variant);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--on-surface-variant);transition:all var(--duration-fast)}
 .letter-close:hover{background:var(--outline-variant);color:var(--on-surface);transform:rotate(90deg)}
-.wax-seal-float{position:absolute;bottom:-30px;left:-30px;width:80px;height:80px;pointer-events:none;animation:float-slow 3s ease-in-out infinite}
-.wax-seal-float img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 24px var(--thread-glow))}
+.wax-seal-float{display:none} /* Ocultado por defecto - era el sello de cera flotando */
 .letter-content{flex:1;display:flex;flex-direction:column;justify-content:center;gap:var(--space-5);text-align:center}
 .letter-divider{width:60px;height:1px;background:var(--grad-letter-divider);margin:0 auto}
 .letter-text{font-family:var(--font-display);font-size:var(--text-body);line-height:1.9;color:var(--on-surface);white-space:pre-line}
@@ -563,11 +562,6 @@ footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);te
         <button id="closeLetterBtn" class="letter-close" aria-label="Cerrar carta">
           <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">close</span>
         </button>
-
-        <!-- Sello de cera roto flotando -->
-        <div class="wax-seal-float" aria-hidden="true">
-          <img alt="Sello de cera carmesí roto" src="https://lh3.googleusercontent.com/aida/AEtjO1UZzPil8sQXbs-enGbAvzZIjWRresWkaT3r9dKKQnftpGYJNb2QD3z0D3jGmLimbaPpDAZdjBD9LCa4FSfGG5HY-xXsTH3qq7d6Sds55Sn0-3ErXf1dAETsvY-UV_wnXZzMmRuYeq7-1N0biS8R_Na0yPsw5BelsUBLQQ208RRYQRZYNkPbYKTq7tGrkLdb3C4Y5ZFb2KPN4MLQH_4-hZZeSAJPmiR8Nl1GhH6V1INzr5Woi2UbFlRDvVzA"/>
-        </div>
 
         <!-- Contenido -->
         <div class="letter-content">
