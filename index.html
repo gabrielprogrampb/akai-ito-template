@@ -241,42 +241,6 @@ main{flex:1;padding:var(--space-5) var(--space-4) calc(var(--space-10)+var(--saf
 .teaser-title{font-family:var(--font-display);font-size:var(--text-headline-sm);font-weight:500;color:var(--primary);margin-bottom:var(--space-1)}
 .teaser-sub{font-size:var(--text-body-sm);color:var(--on-surface-variant)}
 
-/* ===== VIDEO OVERLAY TEASER (Superpuesto en video modal) ===== */
-.video-overlay-teaser{
-  position:absolute;
-  bottom:calc(var(--space-6) + 80px); /* sobre el caption */
-  left:50%;
-  transform:translateX(-50%);
-  width:auto;
-  max-width:90%;
-  background:rgba(255,255,255,0.95);
-  backdrop-filter:blur(10px);
-  border:1px solid var(--outline);
-  box-shadow:var(--shadow-xl);
-  animation:fade-in-up 0.6s var(--ease-emphasized) forwards;
-  opacity:0;
-}
-@media(prefers-color-scheme:dark){
-  .video-overlay-teaser{
-    background:rgba(31,26,26,0.95);
-    border:1px solid var(--outline);
-  }
-}
-.video-overlay-teaser .envelope-img{
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,0.2));
-}
-@media(prefers-color-scheme:dark){
-  .video-overlay-teaser .envelope-img{
-    filter:drop-shadow(0 8px 24px rgba(0,0,0,0.5));
-  }
-}
-.video-overlay-teaser:hover .envelope-img{
-  transform:scale(1.08) rotate(-3deg);
-}
-@media(prefers-reduced-motion:reduce){
-  .video-overlay-teaser{animation:none!important;opacity:1!important}
-}
-
 /* ===== LETTER MODAL (Full-screen) ===== */
 .letter-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity var(--duration-long) var(--ease-standard),visibility var(--duration-long) var(--ease-standard);padding:var(--space-4)}
 .letter-modal.open{opacity:1;visibility:visible}
@@ -641,13 +605,6 @@ footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);te
 
       <!-- Canvas dedicado para confetti DENTRO del video modal (z-index altísimo) -->
       <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
-
-      <!-- Carta teaser SUPERPUESTA en el video modal -->
-      <button id="openLetterBtnVideo" class="letter-teaser-btn video-overlay-teaser" aria-label="Abrir carta de amor" onclick="openLetterFromVideo()">
-        <img class="envelope-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8OEith_nhDIde1Y5tJwleSFfBRw7d6v3ezrlfnclNPXi-6iQs6iL3TWKtaf0owBjaNU-Uxdiyu_Fg0dL7sMuhSFKpeR__ULCeY6UWH1E_jUuVIIVK_h2cB2C1n0X1DJrTv93pO7CmdAeGMT0VoMTK2ePBs6FCdyr9Oy1CuTZgb9aVz35mulH9j0QrpXtEt_yvGcEC3IU0BRHP5LQq3qxaa5-MTlBWrdAJoZCKX3sYPgmFdBraPDKJ_Q" alt="Sobre sellado con sello de cera" loading="lazy">
-        <p class="teaser-title">Toca para abrir</p>
-        <p class="teaser-sub">nuestra carta</p>
-      </button>
     </div>
   </div>
 
