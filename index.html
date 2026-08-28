@@ -309,6 +309,18 @@ main{flex:1;padding:var(--space-5) var(--space-4) calc(var(--space-10)+var(--saf
 /* ===== FOOTER ===== */
 footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);text-transform:uppercase;letter-spacing:0.15em;color:var(--on-surface-variant);font-weight:500}
 
+/* ===== CONFETTI CANVAS (Dentro del video modal) ===== */
+.confetti-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:2000; /* Por encima del video y controles */
+  pointer-events:none;
+  display:none; /* Se muestra solo cuando hay confetti */
+}
+.confetti-canvas.active{display:block}
+
 /* ===== SELECTION ===== */
 ::selection{background:var(--selection-bg);color:var(--selection-fg)}
 
@@ -627,6 +639,9 @@ footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);te
         <span class="material-symbols-outlined">close</span>
       </button>
 
+      <!-- Canvas dedicado para confetti DENTRO del video modal (z-index altísimo) -->
+      <canvas id="confettiCanvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
       <!-- Carta teaser SUPERPUESTA en el video modal -->
       <button id="openLetterBtnVideo" class="letter-teaser-btn video-overlay-teaser" aria-label="Abrir carta de amor" onclick="openLetterFromVideo()">
         <img class="envelope-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8OEith_nhDIde1Y5tJwleSFfBRw7d6v3ezrlfnclNPXi-6iQs6iL3TWKtaf0owBjaNU-Uxdiyu_Fg0dL7sMuhSFKpeR__ULCeY6UWH1E_jUuVIIVK_h2cB2C1n0X1DJrTv93pO7CmdAeGMT0VoMTK2ePBs6FCdyr9Oy1CuTZgb9aVz35mulH9j0QrpXtEt_yvGcEC3IU0BRHP5LQq3qxaa5-MTlBWrdAJoZCKX3sYPgmFdBraPDKJ_Q" alt="Sobre sellado con sello de cera" loading="lazy">
@@ -813,14 +828,24 @@ btnDescubrelo.addEventListener('click', () => {
 function openVideoModal() {
   const modal = document.getElementById('videoModal');
   const modalVideo = document.getElementById('modalVideo');
+  const confettiCanvas = document.getElementById('confettiCanvas');
   if (modal && modalVideo) {
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
     modalVideo.currentTime = memoryVideo.currentTime;
     
+    // Preparar canvas de confetti DENTRO del video modal
+    if (confettiCanvas) {
+      confettiCanvas.classList.add('active');
+      confettiCanvas.width = modalVideo.clientWidth;
+      confettiCanvas.height = modalVideo.clientHeight;
+    }
+    
     // Lanzar confetti DENTRO del video modal (superpuesto al video)
-    if (typeof confetti === 'function') {
-      confetti({
+    if (typeof confetti === 'function' && confettiCanvas) {
+      confettiCanvas.classList.add('active');
+      const myConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: true });
+      myConfetti({
         particleCount: 180,
         spread: 120,
         origin: { y: 0.3 },
@@ -845,10 +870,12 @@ function openVideoModal() {
 function closeVideoModal() {
   const modal = document.getElementById('videoModal');
   const modalVideo = document.getElementById('modalVideo');
+  const confettiCanvas = document.getElementById('confettiCanvas');
   if (modal && modalVideo) {
     modal.classList.remove('open');
     modalVideo.pause();
     modalVideo.onended = null; // limpiar listener
+    if (confettiCanvas) confettiCanvas.classList.remove('active');
     document.body.style.overflow = '';
     
     // Scroll suave a la carta teaser (última sección)
