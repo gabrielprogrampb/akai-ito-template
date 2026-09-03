@@ -756,6 +756,24 @@ function toggleAudio() {
 tryAutoplayMusic();
 audioToggle.addEventListener('click', toggleAudio);
 
+// Primera interacción del usuario en cualquier parte -> iniciar música si no empezó
+let musicInteractionHandled = false;
+function handleFirstInteraction() {
+  if (musicInteractionHandled) return;
+  musicInteractionHandled = true;
+  hasInteracted = true;
+  if (!musicStarted && bgMusic && bgMusic.paused) {
+    fadeInAudio();
+  }
+  // Remover listeners después de la primera interacción
+  document.removeEventListener('click', handleFirstInteraction);
+  document.removeEventListener('touchstart', handleFirstInteraction);
+  document.removeEventListener('keydown', handleFirstInteraction);
+}
+document.addEventListener('click', handleFirstInteraction, { passive: true });
+document.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+document.addEventListener('keydown', handleFirstInteraction, { passive: true });
+
 /* ===== 3. BOTÓN DESCÚBRELO ===== */
 btnDescubrelo.addEventListener('click', () => {
   hasInteracted = true;
