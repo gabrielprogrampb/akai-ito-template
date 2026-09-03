@@ -18,6 +18,12 @@
   <!-- Material Symbols -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
 
+  <!-- Preload critical assets -->
+  <link rel="preload" href="./video.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="./musica.mp3" as="audio" type="audio/mpeg">
+  <link rel="preload" href="./imagenes/principal.jpg?v=2" as="image" type="image/jpeg">
+  <link rel="preload" href="./confetti.min.js" as="script">
+
   <style>
 /* ===== RESET & VARIABLES (Sistema Stitch) ===== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -528,7 +534,7 @@ footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);te
     <section id="videoSection" class="video-section" style="display: none;">
       <div class="video-thumb" role="button" tabindex="0" aria-label="Ver video de cumpleaños en pantalla completa" onclick="openVideoModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal();}">
         <!-- VIDEO_RECUERDOS.mp4 generado desde carpeta imagenes/ -->
-        <video id="memoryVideo" playsinline muted preload="metadata" poster="./imagenes/principal.jpg?v=2">
+        <video id="memoryVideo" playsinline muted preload="auto" poster="./imagenes/principal.jpg?v=2">
           <source src="./video.mp4" type="video/mp4">
           Tu navegador no soporta video HTML5.
         </video>
@@ -585,7 +591,7 @@ footer{padding:var(--space-8);text-align:center;font-size:var(--text-caption);te
     <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
     <div class="video-modal-content">
       <div class="video-player-wrapper">
-        <video id="modalVideo" playsinline controls preload="metadata" class="modal-video" muted>
+        <video id="modalVideo" playsinline controls preload="auto" class="modal-video" muted>
           <source src="./video.mp4" type="video/mp4">
         </video>
         <div class="video-modal-caption">
