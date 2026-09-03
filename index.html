@@ -756,6 +756,11 @@ function toggleAudio() {
 tryAutoplayMusic();
 audioToggle.addEventListener('click', toggleAudio);
 
+// Precargar audio explícitamente para que esté listo en primera interacción
+if (bgMusic) {
+  bgMusic.load(); // Fuerza carga inmediata
+}
+
 // Primera interacción del usuario en cualquier parte -> iniciar música si no empezó
 let musicInteractionHandled = false;
 function handleFirstInteraction() {
@@ -763,7 +768,18 @@ function handleFirstInteraction() {
   musicInteractionHandled = true;
   hasInteracted = true;
   if (!musicStarted && bgMusic && bgMusic.paused) {
-    fadeInAudio();
+    // Asegurar que el audio tenga fuente cargada
+    if (bgMusic.readyState >= 2) { // HAVE_CURRENT_DATA
+      fadeInAudio();
+    } else {
+      // Esperar a que cargue
+      const onCanPlay = () => {
+        bgMusic.removeEventListener('canplaythrough', onCanPlay);
+        if (!musicStarted && bgMusic.paused) fadeInAudio();
+      };
+      bgMusic.addEventListener('canplaythrough', onCanPlay, { once: true });
+      bgMusic.load(); // Fuerza recarga
+    }
   }
   // Remover listeners después de la primera interacción
   document.removeEventListener('click', handleFirstInteraction);
